@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mahtab — Creative Designer · Video Editor · Motion Designer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor">
+    <span class="cursor-text"></span>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="nav">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo">MAHTAB</a>
+      <div class="nav-links">
+        <a href="#work" class="nav-link">Work</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+      <button class="nav-menu-btn" id="menuBtn" aria-label="Menu">
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-inner">
+      <a href="#work" class="mobile-link">Work</a>
+      <a href="#about" class="mobile-link">About</a>
+      <a href="#services" class="mobile-link">Services</a>
+      <a href="#contact" class="mobile-link">Contact</a>
+    </div>
+  </div>
+
+  <!-- 01 — HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="hero-line" data-reveal>I TURN IDEAS</span>
+        <span class="hero-line" data-reveal>INTO <span class="hero-accent">VISUAL</span></span>
+        <span class="hero-line" data-reveal>EXPERIENCES.</span>
+      </h1>
+      <div class="hero-sub" data-reveal>
+        <div class="hero-roles">
+          <span class="hero-role" data-reveal>Creative Designer</span>
+          <span class="hero-role-dot">·</span>
+          <span class="hero-role" data-reveal>Video Editor</span>
+          <span class="hero-role-dot">·</span>
+          <span class="hero-role" data-reveal>Motion Designer</span>
+        </div>
+        <p class="hero-desc" data-reveal>I design visuals, edit stories, and build motion experiences that help brands communicate, connect, and get remembered.</p>
+        <div class="hero-ctas" data-reveal>
+          <a href="#work" class="btn btn-primary">VIEW MY WORK</a>
+          <a href="#contact" class="btn btn-secondary">LET'S TALK</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-line"></div>
+  </section>
+
+  <!-- 02 — HERO SHOWREEL -->
+  <section class="showreel" id="showreel">
+    <div class="showreel-wrapper">
+      <div class="showreel-video" data-reveal>
+        <div class="showreel-placeholder">
+          <div class="showreel-play" id="showreelPlay">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><polygon points="8,5 19,12 8,19" fill="currentColor"/></svg>
+          </div>
+        </div>
+        <div class="showreel-overlay">
+          <span class="showreel-label">SELECTED WORK / 2024—2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 — SELECTED WORK HEADER -->
+  <section class="section work-header" id="work">
+    <div class="container">
+      <span class="section-number" data-reveal>03</span>
+      <h2 class="section-title" data-reveal>SELECTED WORK</h2>
+      <p class="section-desc" data-reveal>A selection of projects across design, motion, video, branding, and digital experiences.</p>
+    </div>
+  </section>
+
+  <!-- 04 — PROJECT GRID -->
+  <section class="projects-grid">
+    <div class="container">
+      <!-- Project 01 — Large Feature -->
+      <div class="project-card project-card--large" data-reveal data-cursor="VIEW">
+        <div class="project-card-visual">
+          <div class="project-img" style="background: linear-gradient(135deg, #081421 0%, #0d2a3a 100%);">
+            <div class="project-img-overlay">
+              <span class="project-category-tag">Performance Creative · Video · Motion</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card-info">
+          <span class="project-num">01</span>
+          <h3 class="project-title">MONKEY MAN'S</h3>
+          <span class="project-cat">Performance Creative / Video / Motion</span>
+        </div>
+      </div>
+
+      <!-- Project 02 -->
+      <div class="project-card project-card--medium" data-reveal data-cursor="VIEW">
+        <div class="project-card-visual">
+          <div class="project-img" style="background: linear-gradient(135deg, #0a1628 0%, #00cdba22 100%);">
+            <div class="project-img-overlay">
+              <span class="project-category-tag">Brand Identity · Motion · Creative Systems</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card-info">
+          <span class="project-num">02</span>
+          <h3 class="project-title">OCTOPI DIGITAL</h3>
+          <span class="project-cat">Brand Identity / Motion / Systems</span>
+        </div>
+      </div>
+
+      <!-- Project 03 -->
+      <div class="project-card project-card--small" data-reveal data-cursor="VIEW">
+        <div class="project-card-visual">
+          <div class="project-img" style="background: linear-gradient(135deg, #f7f7f5 0%, #e8e8e5 100%);">
+            <div class="project-img-overlay">
+              <span class="project-category-tag" style="color:#081421;">Social · Education · Digital Ads</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card-info">
+          <span class="project-num">03</span>
+          <h3 class="project-title">VERITAS PATHWAYS</h3>
+          <span class="project-cat">Social Campaigns / Education / Motion</span>
+        </div>
+      </div>
+
+      <!-- Project 04 — Large -->
+      <div class="project-card project-card--large" data-reveal data-cursor="VIEW">
+        <div class="project-card-visual">
+          <div class="project-img" style="background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);">
+            <div class="project-img-overlay">
+              <span class="project-category-tag">Landscape · Branding · Digital</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card-info">
+          <span class="project-num">04</span>
+          <h3 class="project-title">GLSCAPES</h3>
+          <span class="project-cat">Branding / Visual Identity / Digital</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 — FEATURE PROJECT #1: MONKEY MAN'S -->
+  <section class="case-study" id="case-study-1">
+    <div class="case-study-hero" style="background: linear-gradient(180deg, #081421 0%, #0d2a3a 100%);">
+      <div class="container">
+        <span class="case-study-label" data-reveal>FEATURED PROJECT</span>
+        <h2 class="case-study-title" data-reveal>MONKEY MAN'S<br>TREE SERVICE</h2>
+        <div class="case-study-meta" data-reveal>
+          <span>Performance Creative</span>
+          <span class="meta-dot">·</span>
+          <span>Video Editing</span>
+          <span class="meta-dot">·</span>
+          <span>Marketing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-study-content">
+      <div class="container">
+        <div class="case-study-block" data-reveal>
+          <h3 class="case-study-heading">THE CHALLENGE</h3>
+          <p class="case-study-text">How do you make a local service business feel like a serious, established brand — while creating content designed to generate attention and action?</p>
+        </div>
+
+        <div class="case-study-block" data-reveal>
+          <h3 class="case-study-heading">THE APPROACH</h3>
+          <div class="case-study-process">
+            <span>Strategy</span>
+            <span class="process-arrow">→</span>
+            <span>Concept</span>
+            <span class="process-arrow">→</span>
+            <span>Design</span>
+            <span class="process-arrow">→</span>
+            <span>Edit</span>
+            <span class="process-arrow">→</span>
+            <span>Motion</span>
+          </div>
+        </div>
+
+        <div class="case-study-gallery" data-reveal>
+          <div class="gallery-item gallery-item--wide" style="background: linear-gradient(135deg, #1a1a2e, #0d2a3a);"></div>
+          <div class="gallery-item" style="background: linear-gradient(135deg, #16213e, #1a1a2e);"></div>
+          <div class="gallery-item" style="background: linear-gradient(135deg, #0d2a3a, #081421);"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 07 — RESULTS -->
+    <div class="case-study-results">
+      <div class="container">
+        <div class="results-grid">
+          <div class="result-item" data-reveal>
+            <span class="result-number">+42%</span>
+            <span class="result-label">CTR</span>
+          </div>
+          <div class="result-item" data-reveal>
+            <span class="result-number">150K+</span>
+            <span class="result-label">VIEWS</span>
+          </div>
+          <div class="result-item" data-reveal>
+            <span class="result-number">25+</span>
+            <span class="result-label">CREATIVES</span>
+          </div>
+        </div>
+        <div class="result-contributions" data-reveal>
+          <h4 class="contributions-title">What I Contributed</h4>
+          <div class="contributions-list">
+            <span>Creative Direction</span>
+            <span>Video Editing</span>
+            <span>Motion Design</span>
+            <span>Ad Creative</span>
+            <span>Visual Development</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 — FEATURE PROJECT #2: OCTOPI DIGITAL -->
+  <section class="case-study case-study--dark" id="case-study-2">
+    <div class="case-study-hero" style="background: linear-gradient(180deg, #0a1628 0%, #081421 50%, #00cdba11 100%);">
+      <div class="container">
+        <span class="case-study-label" data-reveal>FEATURED PROJECT</span>
+        <h2 class="case-study-title case-study-title--accent" data-reveal>OCTOPI DIGITAL</h2>
+        <div class="case-study-meta" data-reveal>
+          <span>Brand Identity</span>
+          <span class="meta-dot">·</span>
+          <span>Motion</span>
+          <span class="meta-dot">·</span>
+          <span>Creative Systems</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-study-content">
+      <div class="container">
+        <div class="case-study-block" data-reveal>
+          <h3 class="case-study-heading">THE VISION</h3>
+          <p class="case-study-text">A premium glass morphism brand identity brought to life through motion — where particles converge into form, and data becomes design.</p>
+        </div>
+
+        <div class="case-study-visual-full" data-reveal>
+          <div class="octopi-visual">
+            <div class="glass-card">
+              <div class="glass-card-inner"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="case-study-gallery" data-reveal>
+          <div class="gallery-item gallery-item--wide" style="background: linear-gradient(135deg, #0a1628, #00cdba22); border: 1px solid #00cdba33;"></div>
+          <div class="gallery-item" style="background: linear-gradient(135deg, #081421, #00cdba11); border: 1px solid #00cdba22;"></div>
+          <div class="gallery-item" style="background: linear-gradient(135deg, #00cdba11, #0a1628); border: 1px solid #00cdba33;"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09 — FEATURE PROJECT #3: VERITAS PATHWAYS -->
+  <section class="case-study case-study--light" id="case-study-3">
+    <div class="case-study-hero" style="background: linear-gradient(180deg, #f7f7f5 0%, #ffffff 100%);">
+      <div class="container">
+        <span class="case-study-label" data-reveal style="color:#081421;">FEATURED PROJECT</span>
+        <h2 class="case-study-title" data-reveal style="color:#081421;">VERITAS<br>PATHWAYS</h2>
+        <div class="case-study-meta" data-reveal style="color:#08142180;">
+          <span>Social Campaigns</span>
+          <span class="meta-dot" style="color:#00cdba;">·</span>
+          <span>Educational Graphics</span>
+          <span class="meta-dot" style="color:#00cdba;">·</span>
+          <span>Digital Ads</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="case-study-content" style="background:#ffffff;">
+      <div class="container">
+        <div class="case-study-block" data-reveal>
+          <h3 class="case-study-heading" style="color:#081421;">MAKING COMPLEX INFORMATION FEEL SIMPLE.</h3>
+          <p class="case-study-text" style="color:#081421aa;">A visual system designed to make education, opportunity, and information easier to understand — without losing the premium feel of the brand.</p>
+        </div>
+
+        <div class="case-study-gallery" data-reveal>
+          <div class="gallery-item gallery-item--wide" style="background: linear-gradient(135deg, #f7f7f5, #e8e8e5); border: 1px solid #e0e0dd;"></div>
+          <div class="gallery-item" style="background: linear-gradient(135deg, #00cdba22, #f7f7f5); border: 1px solid #00cdba33;"></div>
+          <div class="gallery-item" style="background: linear-gradient(135deg, #081421, #0d2a3a);"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 — CREATIVE DISCIPLINES -->
+  <section class="disciplines" id="services">
+    <div class="container">
+      <span class="section-number" data-reveal>10</span>
+      <h2 class="section-title" data-reveal>WHAT I DO</h2>
+
+      <div class="disciplines-grid">
+        <div class="discipline-card" data-reveal>
+          <span class="discipline-num">01</span>
+          <h3 class="discipline-title">CREATIVE DESIGN</h3>
+          <ul class="discipline-list">
+            <li>Brand visuals</li>
+            <li>Campaign systems</li>
+            <li>Social creatives</li>
+            <li>Digital advertising</li>
+          </ul>
+        </div>
+        <div class="discipline-card" data-reveal>
+          <span class="discipline-num">02</span>
+          <h3 class="discipline-title">VIDEO</h3>
+          <ul class="discipline-list">
+            <li>Short-form content</li>
+            <li>Commercial editing</li>
+            <li>Documentary editing</li>
+            <li>Performance ads</li>
+          </ul>
+        </div>
+        <div class="discipline-card" data-reveal>
+          <span class="discipline-num">03</span>
+          <h3 class="discipline-title">MOTION</h3>
+          <ul class="discipline-list">
+            <li>Typography</li>
+            <li>Logo animation</li>
+            <li>UI motion</li>
+            <li>Visual effects</li>
+          </ul>
+        </div>
+        <div class="discipline-card" data-reveal>
+          <span class="discipline-num">04</span>
+          <h3 class="discipline-title">AI CREATIVE</h3>
+          <ul class="discipline-list">
+            <li>Concept development</li>
+            <li>AI image generation</li>
+            <li>AI video</li>
+            <li>Creative experimentation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 — INTERACTIVE SKILLS -->
+  <section class="skills">
+    <div class="container">
+      <h3 class="skills-heading" data-reveal>CREATIVE TOOLBOX</h3>
+      <div class="skills-grid">
+        <div class="skill-category" data-reveal data-bg-project="monkey">
+          <h4 class="skill-cat-title">DESIGN</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Photoshop</span>
+            <span class="skill-tag">Illustrator</span>
+            <span class="skill-tag">Figma</span>
+            <span class="skill-tag">Canva</span>
+          </div>
+        </div>
+        <div class="skill-category" data-reveal data-bg-project="octopi">
+          <h4 class="skill-cat-title">VIDEO</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Premiere Pro</span>
+            <span class="skill-tag">After Effects</span>
+            <span class="skill-tag">CapCut</span>
+          </div>
+        </div>
+        <div class="skill-category" data-reveal data-bg-project="veritas">
+          <h4 class="skill-cat-title">MOTION</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">After Effects</span>
+            <span class="skill-tag">Premiere Pro</span>
+          </div>
+        </div>
+        <div class="skill-category" data-reveal data-bg-project="gls">
+          <h4 class="skill-cat-title">AI</h4>
+          <div class="skill-tags">
+            <span class="skill-tag">Runway</span>
+            <span class="skill-tag">Flow</span>
+            <span class="skill-tag">Gemini</span>
+            <span class="skill-tag">Leonardo</span>
+            <span class="skill-tag">Hailuo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 — ABOUT ME -->
+  <section class="about" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-content">
+          <span class="section-number" data-reveal>12</span>
+          <h2 class="about-title" data-reveal>I'M OBSESSED WITH THE MOMENT AN IDEA BECOMES SOMETHING PEOPLE CAN SEE.</h2>
+          <p class="about-text" data-reveal>I'm a creative designer, video editor, and motion designer focused on turning ideas into clear, engaging visual experiences.</p>
+          <p class="about-text" data-reveal>From brand systems and social campaigns to performance ads, cinematic edits, and motion graphics, I work across the entire visual process — from the first concept to the final frame.</p>
+          <p class="about-text about-text--accent" data-reveal>I care about two things:<br><strong>How it looks.</strong> And <strong>whether it works.</strong></p>
+        </div>
+        <div class="about-portrait" data-reveal>
+          <div class="portrait-frame">
+            <div class="portrait-placeholder">
+              <span>M</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 — CREATIVE PROCESS -->
+  <section class="process">
+    <div class="container">
+      <h3 class="process-heading" data-reveal>THE PROCESS</h3>
+      <div class="process-steps">
+        <div class="process-step" data-reveal>
+          <span class="process-num">01</span>
+          <h4 class="process-step-title">DISCOVER</h4>
+          <p class="process-step-desc">Understand the brand, audience, problem and objective.</p>
+        </div>
+        <div class="process-step" data-reveal>
+          <span class="process-num">02</span>
+          <h4 class="process-step-title">CONCEPT</h4>
+          <p class="process-step-desc">Find the visual idea that makes the message worth noticing.</p>
+        </div>
+        <div class="process-step" data-reveal>
+          <span class="process-num">03</span>
+          <h4 class="process-step-title">CREATE</h4>
+          <p class="process-step-desc">Design, edit, animate and refine every frame.</p>
+        </div>
+        <div class="process-step" data-reveal>
+          <span class="process-num">04</span>
+          <h4 class="process-step-title">DELIVER</h4>
+          <p class="process-step-desc">Build the final creative for the platform, audience and objective.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 — CLIENTS -->
+  <section class="clients">
+    <div class="container">
+      <span class="section-number" data-reveal>14</span>
+      <h3 class="clients-heading" data-reveal>SELECTED CLIENTS</h3>
+      <div class="clients-list" data-reveal>
+        <span class="client-name">Octopi Digital</span>
+        <span class="client-name">Monkey Man's</span>
+        <span class="client-name">Veritas Pathways</span>
+        <span class="client-name">GLscapes</span>
+        <span class="client-name">Peak Exteriors</span>
+        <span class="client-name">Renowned Finishing</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 — TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="testimonial" data-reveal>
+        <blockquote class="testimonial-quote">"He didn't just execute the brief. He understood what we were actually trying to achieve."</blockquote>
+        <div class="testimonial-author">
+          <span class="testimonial-name">Client Name</span>
+          <span class="testimonial-role">Position · Company</span>
+        </div>
+      </div>
+      <div class="testimonial" data-reveal>
+        <blockquote class="testimonial-quote">"The quality of work and attention to detail is on another level. Every frame matters."</blockquote>
+        <div class="testimonial-author">
+          <span class="testimonial-name">Client Name</span>
+          <span class="testimonial-role">Position · Company</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 — CREATIVE STATEMENT -->
+  <section class="statement">
+    <div class="container">
+      <h2 class="statement-line" data-reveal>GOOD DESIGN GETS ATTENTION.</h2>
+      <h2 class="statement-line" data-reveal>GOOD MOTION HOLDS IT.</h2>
+      <h2 class="statement-line" data-reveal>GOOD STORIES MAKE IT MATTER.</h2>
+    </div>
+  </section>
+
+  <!-- 17 — CONTACT -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-content">
+        <h2 class="contact-title" data-reveal>HAVE AN IDEA?<br>LET'S MAKE IT<br>IMPOSSIBLE TO IGNORE.</h2>
+        <p class="contact-desc" data-reveal>Have a brand, campaign, video, or idea that needs to come to life?</p>
+        <a href="mailto:hello@yourdomain.com" class="btn btn-primary btn-large" data-reveal>START A PROJECT →</a>
+        <a href="mailto:hello@yourdomain.com" class="contact-email" data-reveal>hello@yourdomain.com</a>
+        <div class="contact-socials" data-reveal>
+          <a href="#" class="social-link">LinkedIn</a>
+          <a href="#" class="social-link">Instagram</a>
+          <a href="#" class="social-link">Behance</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 18 — FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-brand">
+          <span class="footer-logo">MAHTAB</span>
+          <span class="footer-tagline">Creative Designer · Video Editor · Motion Designer</span>
+        </div>
+        <div class="footer-links">
+          <a href="#work">Work</a>
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+          <a href="#">LinkedIn</a>
+          <a href="#">Instagram</a>
+          <a href="#">Behance</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Mahtab. All rights reserved.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
