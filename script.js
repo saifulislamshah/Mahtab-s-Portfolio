@@ -210,6 +210,67 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
+  // VIDEO FILTER
+  // ==========================================
+  const filterButtons = document.querySelectorAll('.video-filter');
+  const videoCards = document.querySelectorAll('.video-card');
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filter = btn.getAttribute('data-filter');
+
+      videoCards.forEach(card => {
+        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+          card.style.display = '';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 50);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 300);
+        }
+      });
+    });
+  });
+
+  // ==========================================
+  // VIDEO PLAY/PAUSE ON CLICK
+  // ==========================================
+  document.querySelectorAll('.video-card-wrapper').forEach(wrapper => {
+    const video = wrapper.querySelector('video');
+    const overlay = wrapper.querySelector('.video-play-overlay');
+    if (!video) return;
+
+    wrapper.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (video.paused) {
+        document.querySelectorAll('.video-player').forEach(v => {
+          if (v !== video) { v.pause(); }
+        });
+        video.play();
+        if (overlay) overlay.classList.add('hidden');
+      } else {
+        video.pause();
+        if (overlay) overlay.classList.remove('hidden');
+      }
+    });
+
+    video.addEventListener('pause', () => {
+      if (overlay) overlay.classList.remove('hidden');
+    });
+    video.addEventListener('play', () => {
+      if (overlay) overlay.classList.add('hidden');
+    });
+  });
+
+  // ==========================================
   // PROJECT CARD PARALLAX (subtle)
   // ==========================================
   const projectCards = document.querySelectorAll('.project-card');

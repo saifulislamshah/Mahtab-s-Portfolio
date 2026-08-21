@@ -90,7 +90,7 @@ ul {
   height: 16px;
   background: var(--accent);
   border-radius: 50%;
-  pointer-events: none;
+  pointer-events: none !important;
   z-index: 10000;
   transition: width 0.3s var(--ease-out), height 0.3s var(--ease-out), background 0.3s;
   display: flex;
@@ -1341,6 +1341,221 @@ ul {
 }
 
 /* ============================================
+   VIDEOS SECTION
+   ============================================ */
+.videos-section {
+  padding: var(--section-gap) 0;
+}
+
+.video-filters {
+  display: flex;
+  gap: 8px;
+  margin: 40px 0;
+  flex-wrap: wrap;
+}
+
+.video-filter {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 10px 20px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-out);
+}
+
+.video-filter:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.video-filter.active {
+  background: var(--accent);
+  color: var(--bg-dark);
+  border-color: var(--accent);
+}
+
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.video-card {
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  transition: all 0.4s var(--ease-out), opacity 0.3s, transform 0.3s;
+}
+
+.video-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.video-card-wrapper {
+  position: relative;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: var(--bg-dark);
+  cursor: pointer;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-out);
+  display: block;
+  position: relative;
+  z-index: 1;
+}
+
+.video-card:hover .video-player {
+  transform: scale(1.04);
+}
+
+.video-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 20, 33, 0.4);
+  opacity: 1;
+  transition: opacity 0.3s;
+  color: white;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.video-play-overlay.hidden {
+  opacity: 0;
+}
+
+.video-card-wrapper.playing .video-play-overlay {
+  opacity: 0;
+}
+
+.video-card-info {
+  padding: 16px 20px;
+}
+
+.video-card-brand {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.video-card-title {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+}
+
+/* Case study video player */
+.case-study-video {
+  margin: 40px 0;
+  border-radius: 12px;
+  overflow: hidden;
+  aspect-ratio: 16/9;
+  background: var(--bg-dark);
+}
+
+.case-study-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================
+   EXPERIENCE
+   ============================================ */
+.experience {
+  padding: var(--section-gap) 0;
+  background: var(--bg-secondary);
+}
+
+.experience-heading {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 60px;
+}
+
+.experience-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px;
+}
+
+.experience-card {
+  padding: 40px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: all 0.4s var(--ease-out);
+}
+
+.experience-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+}
+
+.experience-card-header {
+  margin-bottom: 12px;
+}
+
+.experience-role {
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.experience-type {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.experience-date {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--text-secondary);
+  display: block;
+  margin-bottom: 20px;
+}
+
+.experience-list li {
+  font-size: 15px;
+  color: var(--text-secondary);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.6;
+}
+
+.experience-list li:last-child {
+  border-bottom: none;
+}
+
+/* ============================================
    REVEAL ANIMATIONS
    ============================================ */
 [data-reveal] {
@@ -1352,6 +1567,19 @@ ul {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+
+/* Make sure video cards are always clickable */
+.video-card {
+  pointer-events: auto !important;
+}
+
+.video-card-wrapper {
+  pointer-events: auto !important;
+}
+
+.video-card-wrapper video {
+  pointer-events: auto !important;
 }
 
 /* ============================================
@@ -1367,6 +1595,14 @@ ul {
   .process-steps,
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .video-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .experience-grid {
+    grid-template-columns: 1fr;
   }
 
   .results-grid {
@@ -1424,6 +1660,19 @@ ul {
   .process-steps,
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+
+  .video-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .video-filters {
+    gap: 6px;
+  }
+
+  .video-filter {
+    font-size: 11px;
+    padding: 8px 14px;
   }
 
   .results-grid {
