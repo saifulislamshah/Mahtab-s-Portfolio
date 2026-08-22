@@ -241,31 +241,15 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // VIDEO PLAY/PAUSE ON CLICK
+  // VIDEO PLAY/PAUSE ON CLICK (iframe-based)
   // ==========================================
   document.querySelectorAll('.video-card-wrapper').forEach(wrapper => {
-    const video = wrapper.querySelector('video');
+    const iframe = wrapper.querySelector('iframe');
     const overlay = wrapper.querySelector('.video-play-overlay');
-    if (!video) return;
+    if (!iframe) return;
 
     wrapper.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (video.paused) {
-        document.querySelectorAll('.video-player').forEach(v => {
-          if (v !== video) { v.pause(); }
-        });
-        video.play();
-        if (overlay) overlay.classList.add('hidden');
-      } else {
-        video.pause();
-        if (overlay) overlay.classList.remove('hidden');
-      }
-    });
-
-    video.addEventListener('pause', () => {
-      if (overlay) overlay.classList.remove('hidden');
-    });
-    video.addEventListener('play', () => {
       if (overlay) overlay.classList.add('hidden');
     });
   });

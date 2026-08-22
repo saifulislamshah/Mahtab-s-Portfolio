@@ -1031,21 +1031,16 @@ ul {
   position: relative;
 }
 
-.portrait-placeholder {
+.portrait-img {
   width: 100%;
   height: 100%;
-  background: linear-gradient(135deg, #081421, #0d2a3a);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--ease-out);
 }
 
-.portrait-placeholder span {
-  font-family: var(--font-heading);
-  font-size: 120px;
-  font-weight: 700;
-  color: var(--accent);
-  opacity: 0.3;
+.portrait-frame:hover .portrait-img {
+  transform: scale(1.04);
 }
 
 /* ============================================
@@ -1406,17 +1401,16 @@ ul {
   cursor: pointer;
 }
 
-.video-player {
+.video-embed {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s var(--ease-out);
-  display: block;
+  border: none;
   position: relative;
   z-index: 1;
+  display: block;
 }
 
-.video-card:hover .video-player {
+.video-card:hover .video-embed {
   transform: scale(1.04);
 }
 
@@ -1474,10 +1468,11 @@ ul {
   background: var(--bg-dark);
 }
 
-.case-study-video-player {
+.case-study-video-embed {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border: none;
+  display: block;
 }
 
 /* ============================================
@@ -1578,7 +1573,7 @@ ul {
   pointer-events: auto !important;
 }
 
-.video-card-wrapper video {
+.video-card-wrapper iframe {
   pointer-events: auto !important;
 }
 
