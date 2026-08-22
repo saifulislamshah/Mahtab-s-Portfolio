@@ -702,6 +702,7 @@ ul {
 
 .case-study-content {
   padding: 80px 0;
+  background: var(--bg-dark);
 }
 
 .case-study-block {
@@ -842,6 +843,12 @@ ul {
   font-weight: 500;
   letter-spacing: 0.15em;
   color: var(--text-light-muted);
+}
+
+.result-contributions {
+  margin-top: 40px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(255,255,255,0.1);
 }
 
 .contributions-title {
