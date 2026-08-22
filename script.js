@@ -284,6 +284,26 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
+  // CONTACT FORM — SEND EMAIL
+  // ==========================================
+  const sendEmailBtn = document.getElementById('sendEmailBtn');
+  if (sendEmailBtn) {
+    sendEmailBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const form = document.getElementById('contactForm');
+      const name = form.querySelector('input[name="name"]').value;
+      const email = form.querySelector('input[name="email"]').value;
+      const company = form.querySelector('input[name="company"]').value;
+      const message = form.querySelector('textarea[name="message"]').value;
+
+      const subject = encodeURIComponent(`Project Inquiry from ${name}`);
+      const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nCompany: ${company || 'N/A'}\n\nProject Details:\n${message}`);
+
+      window.location.href = `mailto:Motionartelier@gmail.com?subject=${subject}&body=${body}`;
+    });
+  }
+
+  // ==========================================
   // LOADING STATE
   // ==========================================
   document.body.style.opacity = '0';

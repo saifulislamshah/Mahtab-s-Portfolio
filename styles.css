@@ -1265,11 +1265,15 @@ ul {
   background: var(--bg-dark);
 }
 
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
 .contact-content {
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  text-align: left;
 }
 
 .contact-title {
@@ -1285,7 +1289,7 @@ ul {
 .contact-desc {
   font-size: 18px;
   color: var(--text-light-muted);
-  margin-bottom: 40px;
+  margin-bottom: 24px;
 }
 
 .contact-email {
@@ -1293,7 +1297,8 @@ ul {
   font-size: 16px;
   color: var(--accent);
   text-decoration: none;
-  margin-top: 24px;
+  display: block;
+  margin-bottom: 24px;
   transition: opacity 0.3s;
 }
 
@@ -1304,7 +1309,73 @@ ul {
 .contact-socials {
   display: flex;
   gap: 32px;
-  margin-top: 40px;
+}
+
+/* Contact Form */
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  color: var(--text-light);
+  font-family: var(--font-body);
+  font-size: 15px;
+  transition: border-color 0.3s, background 0.3s;
+  outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.btn-whatsapp {
+  background: #25D366;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  padding: 16px 32px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: all 0.4s var(--ease-out);
+  cursor: pointer;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-whatsapp:hover {
+  background: #1ebe5d;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(37, 211, 102, 0.3);
 }
 
 .social-link {
@@ -1733,6 +1804,11 @@ ul {
 
   .clients-list {
     gap: 24px;
+  }
+
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
 
   .footer-inner {
