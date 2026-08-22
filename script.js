@@ -243,6 +243,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // VIDEO PLAY/PAUSE ON CLICK (iframe-based)
   // ==========================================
+  let currentPlayingWrapper = null;
+
   document.querySelectorAll('.video-card-wrapper').forEach(wrapper => {
     const iframe = wrapper.querySelector('iframe');
     const overlay = wrapper.querySelector('.video-play-overlay');
@@ -250,6 +252,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
     wrapper.addEventListener('click', (e) => {
       e.stopPropagation();
+
+      // If clicking the same card, just hide overlay
+      if (currentPlayingWrapper === wrapper) {
+        if (overlay) overlay.classList.add('hidden');
+        return;
+      }
+
+      // Stop the previous video by reloading its iframe
+      if (currentPlayingWrapper) {
+        const prevIframe = currentPlayingWrapper.querySelector('iframe');
+        const prevOverlay = currentPlayingWrapper.querySelector('.video-play-overlay');
+        if (prevIframe) {
+          prevIframe.src = prevIframe.src;
+        }
+        if (prevOverlay) prevOverlay.classList.remove('hidden');
+      }
+
+      // Play the new video
+      currentPlayingWrapper = wrapper;
       if (overlay) overlay.classList.add('hidden');
     });
   });
