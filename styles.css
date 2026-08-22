@@ -1207,6 +1207,7 @@ ul {
 .process {
   padding: 80px 0;
   background: var(--bg-secondary);
+  overflow: hidden;
 }
 
 .process-heading {
@@ -1222,16 +1223,44 @@ ul {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 40px;
+  position: relative;
+}
+
+.process-steps::before {
+  content: '';
+  position: absolute;
+  top: 36px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--border));
+  transition: width 1.5s var(--ease-out) 0.3s;
+}
+
+.process-steps.revealed::before {
+  width: 100%;
 }
 
 .process-step {
   position: relative;
+  opacity: 0;
+  transform: translateX(-30px);
 }
+
+.process-step.revealed {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.process-step:nth-child(1).revealed { transition-delay: 0.1s; }
+.process-step:nth-child(2).revealed { transition-delay: 0.3s; }
+.process-step:nth-child(3).revealed { transition-delay: 0.5s; }
+.process-step:nth-child(4).revealed { transition-delay: 0.7s; }
 
 .process-step::after {
   content: '';
   position: absolute;
-  top: 24px;
+  top: 36px;
   right: -20px;
   width: 40px;
   height: 1px;
@@ -1247,10 +1276,22 @@ ul {
   font-size: 64px;
   font-weight: 700;
   color: var(--accent);
-  opacity: 0.2;
+  opacity: 0;
   display: block;
   line-height: 1;
   margin-bottom: 16px;
+  transform: scale(0.5);
+  transition: all 0.6s var(--ease-out);
+}
+
+.process-step.revealed .process-num {
+  opacity: 0.2;
+  transform: scale(1);
+}
+
+.process-step:hover .process-num {
+  opacity: 0.5;
+  text-shadow: 0 0 30px rgba(0, 205, 186, 0.3);
 }
 
 .process-step-title {
@@ -1259,6 +1300,11 @@ ul {
   font-weight: 700;
   margin-bottom: 12px;
   letter-spacing: 0.02em;
+  transition: color 0.4s var(--ease-out);
+}
+
+.process-step:hover .process-step-title {
+  color: var(--accent);
 }
 
 .process-step-desc {
@@ -1732,12 +1778,40 @@ ul {
   padding: 40px;
   border: 1px solid var(--border);
   border-radius: 12px;
-  transition: all 0.4s var(--ease-out);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s var(--ease-out);
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.experience-card.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.experience-card:nth-child(1).revealed { transition-delay: 0s; }
+.experience-card:nth-child(2).revealed { transition-delay: 0.15s; }
+
+.experience-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 0;
+  background: var(--accent);
+  transition: height 0.5s var(--ease-out);
+}
+
+.experience-card:hover::before {
+  height: 100%;
 }
 
 .experience-card:hover {
   border-color: var(--accent);
   transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 205, 186, 0.06);
 }
 
 .experience-card-header {
@@ -1750,6 +1824,11 @@ ul {
   font-weight: 700;
   margin-bottom: 6px;
   letter-spacing: -0.01em;
+  transition: color 0.4s var(--ease-out);
+}
+
+.experience-card:hover .experience-role {
+  color: var(--accent);
 }
 
 .experience-type {
@@ -1774,11 +1853,24 @@ ul {
   padding: 8px 0;
   border-bottom: 1px solid var(--border);
   line-height: 1.6;
+  transition: all 0.3s var(--ease-out);
+  transform: translateX(0);
 }
 
 .experience-list li:last-child {
   border-bottom: none;
 }
+
+.experience-card:hover .experience-list li {
+  color: var(--text-primary);
+  transform: translateX(4px);
+}
+
+.experience-card:hover .experience-list li:nth-child(1) { transition-delay: 0.05s; }
+.experience-card:hover .experience-list li:nth-child(2) { transition-delay: 0.1s; }
+.experience-card:hover .experience-list li:nth-child(3) { transition-delay: 0.15s; }
+.experience-card:hover .experience-list li:nth-child(4) { transition-delay: 0.2s; }
+.experience-card:hover .experience-list li:nth-child(5) { transition-delay: 0.25s; }
 
 /* ============================================
    REVEAL ANIMATIONS
@@ -1819,6 +1911,14 @@ ul {
   .process-steps,
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .process-steps::before {
+    display: none;
+  }
+
+  .process-step::after {
+    display: none;
   }
 
   .video-grid {
@@ -1888,6 +1988,11 @@ ul {
   .process-steps,
   .skills-grid {
     grid-template-columns: 1fr;
+  }
+
+  .process-steps::before,
+  .process-step::after {
+    display: none;
   }
 
   .video-grid {
