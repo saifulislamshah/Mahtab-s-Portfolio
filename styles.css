@@ -1324,6 +1324,7 @@ ul {
 .footer {
   padding: 60px 0 40px;
   border-top: 1px solid rgba(255,255,255,0.08);
+  background: var(--bg-dark);
 }
 
 .footer-inner {
