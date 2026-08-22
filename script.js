@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   const cursor = document.getElementById('cursor');
   let cursorX = 0, cursorY = 0;
-  let actualX = 0, actualY = 0;
+
 
   document.addEventListener('mousemove', (e) => {
     cursorX = e.clientX;
