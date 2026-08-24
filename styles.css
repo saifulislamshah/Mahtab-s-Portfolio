@@ -1653,14 +1653,43 @@ ul {
 /* ================= GRID ================= */
 .asset-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 20px;
   align-items: start;
 }
 
-/* Stagger: every 2nd column gets pushed down */
-.asset-grid > div:nth-child(4n+2) {
+/* Stagger: columns 2 and 4 push down */
+.asset-grid > div:nth-child(4n+2),
+.asset-grid > div:nth-child(4n) {
   margin-top: 64px;
+}
+
+/* When 3 cols visible, only col 2 staggers */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .asset-grid > div:nth-child(4n) {
+    margin-top: 0;
+  }
+  .asset-grid > div:nth-child(3n+2) {
+    margin-top: 64px;
+  }
+}
+
+/* When 2 cols visible, only col 2 staggers */
+@media (max-width: 900px) {
+  .asset-grid > div:nth-child(4n),
+  .asset-grid > div:nth-child(3n+2) {
+    margin-top: 0;
+  }
+  .asset-grid > div:nth-child(2n) {
+    margin-top: 48px;
+  }
+}
+
+/* When 1 col, no stagger */
+@media (max-width: 600px) {
+  .asset-grid > div:nth-child(n) {
+    margin-top: 0;
+  }
 }
 
 /* Hidden cards */
@@ -1691,12 +1720,16 @@ ul {
   padding: 24px 24px 0;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s ease;
+  border: 1px solid transparent;
 }
 
 .asset-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent);
 }
 
 .asset-card__header {
@@ -1713,6 +1746,11 @@ ul {
   font-weight: 700;
   line-height: 1.25;
   color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.asset-card:hover .asset-card__title {
+  color: var(--accent);
 }
 
 .asset-card__count {
@@ -1722,7 +1760,7 @@ ul {
   white-space: nowrap;
 }
 
-/* ================= MEDIA + HOVER ZOOM ================= */
+/* ================= MEDIA + HOVER ANIMATION ================= */
 .asset-card__media {
   position: relative;
   aspect-ratio: 1 / 1;
@@ -1731,6 +1769,7 @@ ul {
   background: var(--bg-dark);
 }
 
+/* Video iframe */
 .asset-card__media .video-embed {
   position: absolute;
   inset: 0;
@@ -1742,19 +1781,19 @@ ul {
 }
 
 .asset-card:hover .asset-card__media .video-embed {
-  transform: scale(1.08);
+  transform: scale(1.06);
 }
 
-/* Play Overlay */
+/* Play Overlay — animated reveal */
 .video-play-overlay {
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(8, 20, 33, 0.35);
+  background: rgba(8, 20, 33, 0.4);
   opacity: 1;
-  transition: opacity 0.4s var(--ease-out);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   color: white;
   pointer-events: none;
   z-index: 2;
@@ -1765,16 +1804,20 @@ ul {
   opacity: 0;
 }
 
+/* Play button — scales in on hover */
 .video-play-overlay svg {
-  width: 48px;
-  height: 48px;
-  opacity: 0.9;
-  transition: transform 0.4s var(--ease-out), opacity 0.3s;
+  width: 52px;
+  height: 52px;
+  opacity: 0;
+  transform: scale(0.6);
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.4s ease;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
 }
 
 .asset-card:hover .video-play-overlay svg {
-  transform: scale(1.1);
   opacity: 1;
+  transform: scale(1);
 }
 
 /* ================= VIEW MORE BUTTON ================= */
@@ -1820,27 +1863,13 @@ ul {
 }
 
 /* ================= RESPONSIVE ================= */
-@media (max-width: 1200px) {
-  .asset-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (max-width: 900px) {
-  .asset-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .asset-grid > div:nth-child(4n+2) {
-    margin-top: 0;
-  }
-}
-
 @media (max-width: 600px) {
-  .asset-grid {
-    grid-template-columns: 1fr;
-  }
   .asset-card__title {
     font-size: 18px;
+  }
+  .video-play-overlay svg {
+    width: 44px;
+    height: 44px;
   }
 }
 
