@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // VIDEO FILTER
   // ==========================================
   const filterButtons = document.querySelectorAll('.video-filter');
-  const videoCards = document.querySelectorAll('.video-card');
+  const videoCards = document.querySelectorAll('.asset-card[data-category]');
 
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -241,11 +241,28 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
+  // VIEW MORE BUTTON
+  // ==========================================
+  const viewMoreBtn = document.getElementById('viewMoreBtn');
+  const hiddenCards = document.querySelectorAll('.video-card-hidden');
+
+  if (viewMoreBtn) {
+    viewMoreBtn.addEventListener('click', () => {
+      hiddenCards.forEach((card, i) => {
+        setTimeout(() => {
+          card.classList.add('video-card-visible');
+        }, i * 100);
+      });
+      viewMoreBtn.classList.add('btn-hidden');
+    });
+  }
+
+  // ==========================================
   // VIDEO PLAY/PAUSE ON CLICK (iframe-based)
   // ==========================================
   let currentPlayingWrapper = null;
 
-  document.querySelectorAll('.video-card-wrapper').forEach(wrapper => {
+  document.querySelectorAll('.asset-card__media').forEach(wrapper => {
     const iframe = wrapper.querySelector('iframe');
     const overlay = wrapper.querySelector('.video-play-overlay');
     if (!iframe) return;
@@ -253,13 +270,11 @@ document.addEventListener('DOMContentLoaded', () => {
     wrapper.addEventListener('click', (e) => {
       e.stopPropagation();
 
-      // If clicking the same card, just hide overlay
       if (currentPlayingWrapper === wrapper) {
         if (overlay) overlay.classList.add('hidden');
         return;
       }
 
-      // Stop the previous video by reloading its iframe
       if (currentPlayingWrapper) {
         const prevIframe = currentPlayingWrapper.querySelector('iframe');
         const prevOverlay = currentPlayingWrapper.querySelector('.video-play-overlay');
@@ -269,7 +284,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (prevOverlay) prevOverlay.classList.remove('hidden');
       }
 
-      // Play the new video
       currentPlayingWrapper = wrapper;
       if (overlay) overlay.classList.add('hidden');
     });
