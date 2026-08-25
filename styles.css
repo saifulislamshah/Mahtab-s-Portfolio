@@ -1691,12 +1691,17 @@ ul {
   padding: 24px 24px 0;
   overflow: hidden;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  position: relative;
 }
 
+/* FULL CARD UP-ZOOM: entire card lifts and scales together */
 .asset-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+  transform: translateY(-8px) scale(1.03) !important;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+  z-index: 10;
 }
 
 .asset-card__header {
@@ -1743,11 +1748,37 @@ ul {
   height: 100%;
   border: none;
   z-index: 1;
-  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.asset-card:hover .asset-card__media .video-embed {
-  transform: scale(1.08);
+/* Green arrow button */
+.asset-card__arrow {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+
+.asset-card__arrow svg {
+  width: 20px;
+  height: 20px;
+  color: var(--bg-dark);
+}
+
+.asset-card:hover .asset-card__arrow {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Play Overlay */
@@ -1773,13 +1804,7 @@ ul {
 .video-play-overlay svg {
   width: 48px;
   height: 48px;
-  opacity: 0.9;
-  transition: transform 0.4s var(--ease-out), opacity 0.3s;
-}
-
-.asset-card:hover .video-play-overlay svg {
-  transform: scale(1.1);
-  opacity: 1;
+  opacity: 0.8;
 }
 
 /* ================= VIEW MORE BUTTON ================= */
@@ -2000,19 +2025,6 @@ ul {
   transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
 }
 
-/* Make sure video cards are always clickable */
-.video-card {
-  pointer-events: auto !important;
-}
-
-.video-card-wrapper {
-  pointer-events: auto !important;
-}
-
-.video-card-wrapper iframe {
-  pointer-events: auto !important;
-}
-
 /* ============================================
    RESPONSIVE
    ============================================ */
@@ -2033,10 +2045,6 @@ ul {
 
   .process-step::after {
     display: none;
-  }
-
-  .video-grid {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .experience-grid {
@@ -2107,10 +2115,6 @@ ul {
   .process-steps::before,
   .process-step::after {
     display: none;
-  }
-
-  .video-grid {
-    grid-template-columns: 1fr;
   }
 
   .video-filters {
