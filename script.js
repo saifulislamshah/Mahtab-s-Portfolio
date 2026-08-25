@@ -224,7 +224,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const filter = btn.getAttribute('data-filter');
 
       videoCards.forEach(card => {
-        if (filter === 'all' || card.getAttribute('data-category') === filter) {
+        const matches = filter === 'all' || card.getAttribute('data-category') === filter;
+
+        if (matches) {
+          // Show all matching cards (including hidden ones)
+          card.classList.remove('video-card-hidden');
           card.style.display = '';
           setTimeout(() => {
             card.style.opacity = '1';
