@@ -5,50 +5,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // ==========================================
-  // CUSTOM CURSOR
-  // ==========================================
-  const cursor = document.getElementById('cursor');
-  let cursorX = 0, cursorY = 0;
-  let actualX = 0, actualY = 0;
-
-  document.addEventListener('mousemove', (e) => {
-    cursorX = e.clientX;
-    cursorY = e.clientY;
-  });
-
-  function animateCursor() {
-    actualX += (cursorX - actualX) * 0.15;
-    actualY += (cursorY - actualY) * 0.15;
-    cursor.style.transform = `translate(${actualX - 8}px, ${actualY - 8}px)`;
-    requestAnimationFrame(animateCursor);
-  }
-  animateCursor();
-
-  // Cursor hover states
-  document.querySelectorAll('[data-cursor]').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      const text = el.getAttribute('data-cursor');
-      cursor.querySelector('.cursor-text').textContent = text;
-      cursor.classList.add('active');
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.classList.remove('active');
-      cursor.querySelector('.cursor-text').textContent = '';
-    });
-  });
-
-  // Cursor on CTAs and buttons
-  document.querySelectorAll('.btn, .showreel-play, .nav-link, .social-link, .client-name, .skill-tag').forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.transform += ' scale(1.5)';
-      cursor.style.background = 'var(--accent)';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.background = 'var(--accent)';
-    });
-  });
-
-  // ==========================================
   // NAVIGATION
   // ==========================================
   const nav = document.getElementById('nav');
