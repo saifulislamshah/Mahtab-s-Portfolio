@@ -214,6 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   const filterButtons = document.querySelectorAll('.video-filter');
   const videoCards = document.querySelectorAll('.asset-card[data-category]');
+  const viewMoreWrap = document.querySelector('.video-view-more-wrap');
 
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -237,6 +238,11 @@ document.addEventListener('DOMContentLoaded', () => {
           }, 300);
         }
       });
+
+      // Show View More only for "all" filter
+      if (viewMoreWrap) {
+        viewMoreWrap.style.display = filter === 'all' ? '' : 'none';
+      }
     });
   });
 

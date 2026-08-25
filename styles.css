@@ -1731,6 +1731,11 @@ ul {
   background: var(--bg-dark);
 }
 
+/* Reels cards: 9:16 portrait ratio */
+[data-category="reels"] .asset-card__media {
+  aspect-ratio: 9 / 16;
+}
+
 .asset-card__media .video-embed {
   position: absolute;
   inset: 0;
