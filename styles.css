@@ -1380,15 +1380,15 @@ ul {
    CONTACT
    ============================================ */
 .contact {
-  padding: 80px 0;
+  padding: 100px 0;
   background: var(--bg-dark);
 }
 
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 60px;
+  align-items: center;
 }
 
 .contact-content {
@@ -1397,18 +1397,20 @@ ul {
 
 .contact-title {
   font-family: var(--font-heading);
-  font-size: clamp(36px, 6vw, 80px);
+  font-size: clamp(28px, 3.5vw, 48px);
   font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
   color: var(--text-light);
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .contact-desc {
-  font-size: 18px;
+  font-size: 16px;
   color: var(--text-light-muted);
-  margin-bottom: 24px;
+  margin-bottom: 32px;
+  max-width: 420px;
+  line-height: 1.6;
 }
 
 .contact-email {
@@ -1435,17 +1437,52 @@ ul {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 24px;
+  gap: 28px;
   text-align: center;
+  padding: 48px 40px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  transition: all 0.4s var(--ease-out);
+}
+
+.contact-upwork:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(0, 205, 186, 0.2);
 }
 
 .upwork-logo {
-  max-width: 180px;
+  max-width: 140px;
   height: auto;
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  transition: all 0.4s var(--ease-out);
+}
+
+.contact-upwork:hover .upwork-logo {
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(1.05);
 }
 
 .upwork-btn {
   white-space: nowrap;
+  background: var(--accent);
+  color: var(--bg-dark);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 18px 40px;
+  border-radius: 100px;
+  letter-spacing: 0.08em;
+  transition: all 0.4s var(--ease-out);
+  box-shadow: 0 4px 20px rgba(0, 205, 186, 0.3);
+}
+
+.upwork-btn:hover {
+  background: #fff;
+  color: var(--bg-dark);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 32px rgba(0, 205, 186, 0.4);
 }
 
 /* Contact Form */
@@ -2118,6 +2155,15 @@ ul {
   .contact-grid {
     grid-template-columns: 1fr;
     gap: 48px;
+  }
+
+  .contact-upwork {
+    padding: 36px 28px;
+  }
+
+  .upwork-btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .footer-inner {
