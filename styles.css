@@ -1430,6 +1430,24 @@ ul {
   gap: 32px;
 }
 
+.contact-upwork {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.upwork-logo {
+  max-width: 180px;
+  height: auto;
+}
+
+.upwork-btn {
+  white-space: nowrap;
+}
+
 /* Contact Form */
 .contact-form {
   display: flex;
