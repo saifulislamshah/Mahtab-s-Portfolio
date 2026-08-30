@@ -230,8 +230,8 @@ ul {
   padding-top: 120px;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 48px;
   align-items: center;
 }
 
@@ -241,11 +241,11 @@ ul {
 
 .hero-title {
   font-family: var(--font-heading);
-  font-size: clamp(48px, 9vw, 140px);
+  font-size: clamp(36px, 5.5vw, 80px);
   font-weight: 700;
-  line-height: 1.05;
+  line-height: 1.1;
   letter-spacing: -0.03em;
-  margin-bottom: 40px;
+  margin-bottom: 32px;
 }
 
 .hero-line {
@@ -323,11 +323,11 @@ ul {
 }
 
 .hero-desc {
-  font-size: 18px;
+  font-size: 16px;
   line-height: 1.7;
   color: var(--text-secondary);
-  max-width: 640px;
-  margin-bottom: 40px;
+  max-width: 520px;
+  margin-bottom: 32px;
 }
 
 .hero-ctas {
@@ -355,7 +355,7 @@ ul {
 
 .hero-image-frame {
   width: 100%;
-  max-width: 420px;
+  max-width: 320px;
   aspect-ratio: 3/4;
   border-radius: 16px;
   overflow: hidden;
@@ -2034,7 +2034,7 @@ ul {
 
   .hero-grid {
     grid-template-columns: 1fr;
-    gap: 48px;
+    gap: 36px;
   }
 
   .hero-image {
@@ -2042,7 +2042,7 @@ ul {
   }
 
   .hero-image-frame {
-    max-width: 300px;
+    max-width: 260px;
   }
 
   .about-grid {
@@ -2065,7 +2065,7 @@ ul {
   }
 
   .hero-title {
-    font-size: clamp(36px, 10vw, 64px);
+    font-size: clamp(28px, 8vw, 48px);
   }
 
   .hero-roles {
