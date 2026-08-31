@@ -1113,6 +1113,87 @@ ul {
 .skill-category:hover .skill-tag:nth-child(6) { transition-delay: 0.25s; }
 
 /* ============================================
+   SOFTWARE TOOLS
+   ============================================ */
+.software-tools {
+  padding: 60px 0 80px;
+}
+
+.software-heading {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 40px;
+}
+
+.software-marquee {
+  display: flex;
+  overflow: hidden;
+}
+
+.software-marquee-inner {
+  display: flex;
+  flex-shrink: 0;
+  justify-content: space-around;
+  min-width: 100%;
+  animation: scroll-software 20s linear infinite;
+}
+
+.software-marquee:hover .software-marquee-inner {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-software {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
+}
+
+.software-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  padding: 8px 28px;
+  transition: all 0.4s var(--ease-out);
+}
+
+.software-item:hover {
+  transform: translateY(-6px) scale(1.05);
+}
+
+.software-item img {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  border-radius: 16px;
+  background: var(--bg-secondary);
+  padding: 10px;
+  border: 1px solid var(--border);
+  transition: all 0.4s var(--ease-out);
+}
+
+.software-item:hover img {
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px rgba(0, 205, 186, 0.15);
+  background: var(--bg-primary);
+}
+
+.software-item span {
+  font-size: 11px;
+  color: var(--text-secondary);
+  letter-spacing: 0.05em;
+  transition: color 0.3s;
+  white-space: nowrap;
+}
+
+.software-item:hover span {
+  color: var(--accent);
+}
+
+/* ============================================
    ABOUT
    ============================================ */
 .about {
@@ -2201,5 +2282,19 @@ ul {
 
   .statement-line {
     font-size: clamp(28px, 8vw, 48px);
+  }
+
+  .software-item img {
+    width: 52px;
+    height: 52px;
+    padding: 8px;
+  }
+
+  .software-item {
+    padding: 8px 18px;
+  }
+
+  .software-marquee-inner {
+    animation-duration: 15s;
   }
 }
