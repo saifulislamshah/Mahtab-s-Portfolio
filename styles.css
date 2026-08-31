@@ -589,6 +589,17 @@ ul {
   width: 100%;
   height: 100%;
   transition: transform 0.8s var(--ease-out);
+  position: relative;
+}
+
+.project-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  z-index: 1;
 }
 
 .project-card:hover .project-img {
@@ -604,6 +615,7 @@ ul {
   background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
   opacity: 0;
   transition: opacity 0.4s;
+  z-index: 2;
 }
 
 .project-card:hover .project-img-overlay {
