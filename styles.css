@@ -613,6 +613,18 @@ lite-youtube {
   background-color: #000;
 }
 
+lite-youtube iframe {
+  border: none;
+}
+
+lite-youtube .lty-playbtn {
+  opacity: 0.9;
+}
+
+lite-youtube[ready] .lty-playbtn {
+  opacity: 0;
+}
+
 .project-card:hover .project-img {
   transform: scale(1.04);
 }
