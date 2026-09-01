@@ -166,92 +166,160 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
-  // VIDEO FILTER
+  // VIDEO FILTER + VIEW MORE + INTERLEAVE
   // ==========================================
+  const CARDS_PER_PAGE = 12;
+  const videoGrid = document.getElementById('videoGrid');
   const filterButtons = document.querySelectorAll('.video-filter');
-  const videoCards = document.querySelectorAll('.asset-card[data-category]');
+  const allVideoCards = Array.from(document.querySelectorAll('.asset-card[data-category]'));
   const viewMoreWrap = document.querySelector('.video-view-more-wrap');
+  const viewMoreBtn = document.getElementById('viewMoreBtn');
+  let currentFilter = 'all';
+  let showingAll = false;
 
-  filterButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterButtons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
+  // Store original order for restoring
+  const originalOrder = [...allVideoCards];
 
-      const filter = btn.getAttribute('data-filter');
+  // Get interleaving pattern based on viewport width
+  // Pattern must match CSS grid-column spans so brands fill complete rows
+  function getInterleavePattern() {
+    const w = window.innerWidth;
+    if (w <= 900) return { reelsPerGroup: 2, brandsPerGroup: 1 }; // Mobile: 2 cols, brand span 2 = full row
+    if (w <= 1200) return { reelsPerGroup: 3, brandsPerGroup: 1 }; // Tablet: 3 cols, brand span 3 = full row
+    if (w >= 1800) return { reelsPerGroup: 6, brandsPerGroup: 3 }; // Wide: 6 cols, brand span 2, 3 brands = full row
+    return { reelsPerGroup: 4, brandsPerGroup: 2 }; // PC: 4 cols, brand span 2, 2 brands = full row
+  }
 
-      videoCards.forEach(card => {
-        const matches = filter === 'all' || card.getAttribute('data-category') === filter;
+  // Build interleaved order: reels first in groups, then brand cards mixed in
+  function buildInterleavedOrder() {
+    const reels = allVideoCards.filter(c => c.getAttribute('data-category') === 'reels');
+    const brands = allVideoCards.filter(c => c.getAttribute('data-category') === 'brand');
+    const { reelsPerGroup, brandsPerGroup } = getInterleavePattern();
+    const result = [];
+    let rIdx = 0;
+    let bIdx = 0;
 
-        if (matches) {
-          // Show all matching cards (including hidden ones)
-          card.classList.remove('video-card-hidden');
+    while (rIdx < reels.length || bIdx < brands.length) {
+      // Add a group of reels
+      for (let i = 0; i < reelsPerGroup && rIdx < reels.length; i++) {
+        result.push(reels[rIdx++]);
+      }
+      // Add a group of brands
+      for (let i = 0; i < brandsPerGroup && bIdx < brands.length; i++) {
+        result.push(brands[bIdx++]);
+      }
+    }
+    return result;
+  }
+
+  // Reorder DOM to match given array
+  function reorderDOM(cards) {
+    cards.forEach(card => videoGrid.appendChild(card));
+  }
+
+  function applyFilter(filter, showAll) {
+    currentFilter = filter;
+    showingAll = showAll;
+
+    if (filter === 'all') {
+      // Interleave and reorder DOM
+      const interleaved = buildInterleavedOrder();
+      reorderDOM(interleaved);
+
+      // Show/hide based on pagination
+      interleaved.forEach((card, i) => {
+        if (showAll || i < CARDS_PER_PAGE) {
           card.style.display = '';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(20px)';
           setTimeout(() => {
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
           }, 50);
         } else {
-          card.style.opacity = '0';
-          card.style.transform = 'translateY(20px)';
-          setTimeout(() => {
-            card.style.display = 'none';
-          }, 300);
+          card.style.display = 'none';
         }
       });
 
-      // Show View More only for "all" filter
       if (viewMoreWrap) {
-        viewMoreWrap.style.display = filter === 'all' ? '' : 'none';
+        viewMoreWrap.style.display = interleaved.length > CARDS_PER_PAGE && !showAll ? '' : 'none';
       }
+    } else {
+      // Restore original DOM order first
+      reorderDOM(originalOrder);
+
+      // Filter by category
+      let matchCount = 0;
+      allVideoCards.forEach(card => {
+        const matches = card.getAttribute('data-category') === filter;
+        if (matches) {
+          matchCount++;
+          if (showAll || matchCount <= CARDS_PER_PAGE) {
+            card.style.display = '';
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            setTimeout(() => {
+              card.style.opacity = '1';
+              card.style.transform = 'translateY(0)';
+            }, 50);
+          } else {
+            card.style.display = 'none';
+          }
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      if (viewMoreWrap) {
+        viewMoreWrap.style.display = matchCount > CARDS_PER_PAGE && !showAll ? '' : 'none';
+      }
+    }
+  }
+
+  filterButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterButtons.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      applyFilter(btn.getAttribute('data-filter'), false);
     });
   });
 
-  // ==========================================
-  // VIEW MORE BUTTON
-  // ==========================================
-  const viewMoreBtn = document.getElementById('viewMoreBtn');
-  const hiddenCards = document.querySelectorAll('.video-card-hidden');
+  // Initial state: show first 12 with interleaving
+  applyFilter('all', false);
 
+  // Re-interleave on resize (debounced)
+  let resizeTimer;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      if (currentFilter === 'all') applyFilter('all', showingAll);
+    }, 250);
+  });
+
+  // View More button
   if (viewMoreBtn) {
     viewMoreBtn.addEventListener('click', () => {
-      hiddenCards.forEach((card, i) => {
-        setTimeout(() => {
-          card.classList.add('video-card-visible');
-        }, i * 100);
-      });
-      viewMoreBtn.classList.add('btn-hidden');
+      applyFilter(currentFilter, true);
     });
   }
 
   // ==========================================
-  // VIDEO PLAY/PAUSE ON CLICK (lite-youtube)
+  // ONLY ONE VIDEO PLAY AT A TIME
   // ==========================================
   let currentPlayingCard = null;
 
   document.querySelectorAll('.asset-card__media').forEach(wrapper => {
     const liteYT = wrapper.querySelector('lite-youtube');
-    const overlay = wrapper.querySelector('.video-play-overlay');
     if (!liteYT) return;
 
     wrapper.addEventListener('click', (e) => {
-      e.stopPropagation();
-
-      if (currentPlayingCard === wrapper) {
-        if (overlay) overlay.classList.add('hidden');
-        return;
-      }
-
-      if (currentPlayingCard) {
+      if (currentPlayingCard && currentPlayingCard !== wrapper) {
         const prevYT = currentPlayingCard.querySelector('lite-youtube');
-        const prevOverlay = currentPlayingCard.querySelector('.video-play-overlay');
         if (prevYT && prevYT.querySelector('iframe')) {
           prevYT.querySelector('iframe').contentWindow.postMessage('{"command":"pause"}', '*');
         }
-        if (prevOverlay) prevOverlay.classList.remove('hidden');
       }
-
       currentPlayingCard = wrapper;
-      if (overlay) overlay.classList.add('hidden');
     });
   });
 
