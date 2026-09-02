@@ -1804,21 +1804,27 @@ lite-youtube[ready] .lty-playbtn {
 
 /* ================= CARD SHELL ================= */
 .asset-card {
-  background: var(--bg-secondary);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border-radius: 20px;
   padding: 24px;
   overflow: hidden;
   cursor: pointer;
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s var(--ease-out);
   will-change: transform;
   position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 /* FULL CARD UP-ZOOM: entire card lifts and scales together */
 .asset-card:hover {
   transform: translateY(-8px) scale(1.03) !important;
-  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 16px 48px rgba(202, 247, 11, 0.08), 0 8px 24px rgba(0, 0, 0, 0.2);
+  border-color: rgba(202, 247, 11, 0.3);
   z-index: 10;
 }
 
@@ -1851,7 +1857,8 @@ lite-youtube[ready] .lty-playbtn {
   aspect-ratio: 1 / 1;
   border-radius: 14px;
   overflow: hidden;
-  background: var(--bg-dark);
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 /* Reels cards: 9:16 portrait ratio */
