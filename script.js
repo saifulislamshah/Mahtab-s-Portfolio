@@ -324,6 +324,69 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ==========================================
+  // CAROUSEL DRAG TO SCROLL
+  // ==========================================
+  const carouselContainer = document.querySelector('.projects-carousel');
+  const carouselTrack = document.querySelector('.carousel-track');
+  if (carouselContainer && carouselTrack) {
+    let isDragging = false;
+    let startX;
+    let scrollLeft;
+
+    carouselContainer.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      carouselContainer.classList.add('dragging');
+      carouselTrack.classList.add('dragging');
+      startX = e.pageX - carouselContainer.offsetLeft;
+      scrollLeft = carouselContainer.scrollLeft;
+    });
+
+    carouselContainer.addEventListener('mouseleave', () => {
+      if (isDragging) {
+        isDragging = false;
+        carouselContainer.classList.remove('dragging');
+        carouselTrack.classList.remove('dragging');
+      }
+    });
+
+    carouselContainer.addEventListener('mouseup', () => {
+      isDragging = false;
+      carouselContainer.classList.remove('dragging');
+      carouselTrack.classList.remove('dragging');
+    });
+
+    carouselContainer.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const x = e.pageX - carouselContainer.offsetLeft;
+      const walk = (x - startX) * 2;
+      carouselContainer.scrollLeft = scrollLeft - walk;
+    });
+
+    // Touch support for mobile
+    carouselContainer.addEventListener('touchstart', (e) => {
+      isDragging = true;
+      carouselContainer.classList.add('dragging');
+      carouselTrack.classList.add('dragging');
+      startX = e.touches[0].pageX - carouselContainer.offsetLeft;
+      scrollLeft = carouselContainer.scrollLeft;
+    });
+
+    carouselContainer.addEventListener('touchend', () => {
+      isDragging = false;
+      carouselContainer.classList.remove('dragging');
+      carouselTrack.classList.remove('dragging');
+    });
+
+    carouselContainer.addEventListener('touchmove', (e) => {
+      if (!isDragging) return;
+      const x = e.touches[0].pageX - carouselContainer.offsetLeft;
+      const walk = (x - startX) * 2;
+      carouselContainer.scrollLeft = scrollLeft - walk;
+    });
+  }
+
+  // ==========================================
   // PROJECT CARD PARALLAX (subtle)
   // ==========================================
   const projectCards = document.querySelectorAll('.project-card');

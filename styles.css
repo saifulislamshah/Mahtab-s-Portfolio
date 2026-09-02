@@ -544,10 +544,23 @@ ul {
    ============================================ */
 .projects-carousel {
   margin-bottom: 60px;
-  overflow-x: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   padding-top: 4px;
   mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  cursor: grab;
+}
+
+.projects-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.projects-carousel.dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
 }
 
 .carousel-track {
@@ -557,7 +570,7 @@ ul {
   animation: scroll-left 40s linear infinite;
 }
 
-.carousel-track:hover {
+.carousel-track.dragging {
   animation-play-state: paused;
 }
 
