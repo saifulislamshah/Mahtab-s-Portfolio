@@ -306,33 +306,22 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   // GLOBAL: ONE VIDEO AT A TIME (entire page)
   // ==========================================
+  // When ANY lite-youtube is clicked, FORCE STOP every other video
+  // by removing its iframe. postMessage is unreliable due to timing.
 
-  // Correct YouTube iframe API postMessage format
-  function pauseYouTubeIframe(iframe) {
-    if (!iframe || !iframe.contentWindow) return;
-    iframe.contentWindow.postMessage(JSON.stringify({
-      event: 'command',
-      func: 'pauseVideo',
-      args: ''
-    }), '*');
-  }
-
-  // Pause every activated lite-youtube EXCEPT the one passed in
-  function pauseAllOtherVideos(exceptLiteYT) {
-    document.querySelectorAll('lite-youtube.lyt-activated').forEach(liteYT => {
-      if (liteYT === exceptLiteYT) return;
-      pauseYouTubeIframe(liteYT.querySelector('iframe'));
-    });
-  }
-
-  // Attach click handler to EVERY lite-youtube on the page
   document.querySelectorAll('lite-youtube').forEach(liteYT => {
     liteYT.addEventListener('click', () => {
-      // Small delay so the newly clicked iframe is created first
-      setTimeout(() => {
-        pauseAllOtherVideos(liteYT);
-      }, 50);
-    });
+      // Find ALL other activated lite-youtube elements and kill their iframes
+      document.querySelectorAll('lite-youtube.lyt-activated').forEach(other => {
+        if (other === liteYT) return;
+        const iframe = other.querySelector('iframe');
+        if (iframe) {
+          iframe.remove();
+        }
+        // Remove activation state so library can re-create iframe on next click
+        other.classList.remove('lyt-activated');
+      });
+    }, true); // useCapture: fire BEFORE lite-youtube's own click handler
   });
 
   // ==========================================
