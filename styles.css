@@ -570,7 +570,8 @@ ul {
   animation: scroll-left 40s linear infinite;
 }
 
-.carousel-track.dragging {
+.carousel-track.dragging,
+.carousel-track.video-active {
   animation-play-state: paused;
 }
 

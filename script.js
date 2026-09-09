@@ -304,15 +304,26 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // ONLY ONE VIDEO PLAY AT A TIME
+  // ONLY ONE VIDEO PLAY AT A TIME + CAROUSEL PAUSE
   // ==========================================
   let currentPlayingCard = null;
 
+  function pauseAllOtherVideos(exceptLiteYT) {
+    document.querySelectorAll('lite-youtube.lyt-activated').forEach(liteYT => {
+      if (liteYT === exceptLiteYT) return;
+      const iframe = liteYT.querySelector('iframe');
+      if (iframe) {
+        iframe.contentWindow.postMessage('{"command":"pause"}', '*');
+      }
+    });
+  }
+
+  // --- ALL VIDEOS SECTION: one video at a time ---
   document.querySelectorAll('.asset-card__media').forEach(wrapper => {
     const liteYT = wrapper.querySelector('lite-youtube');
     if (!liteYT) return;
 
-    wrapper.addEventListener('click', (e) => {
+    wrapper.addEventListener('click', () => {
       if (currentPlayingCard && currentPlayingCard !== wrapper) {
         const prevYT = currentPlayingCard.querySelector('lite-youtube');
         if (prevYT && prevYT.querySelector('iframe')) {
@@ -323,11 +334,74 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // --- CAROUSEL: pause animation + one video at a time + resume on end ---
+  const carouselTrack = document.querySelector('.carousel-track');
+  if (carouselTrack) {
+    const carouselLiteYTs = carouselTrack.querySelectorAll('lite-youtube');
+    let currentCarouselVideo = null;
+
+    carouselLiteYTs.forEach(liteYT => {
+      // Detect when lite-youtube gets activated (iframe created)
+      const observer = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+            if (liteYT.classList.contains('lyt-activated')) {
+              // Pause all other videos (carousel + grid)
+              pauseAllOtherVideos(liteYT);
+              // Pause carousel animation
+              carouselTrack.classList.add('video-active');
+              currentCarouselVideo = liteYT;
+              observer.disconnect();
+              return;
+            }
+          }
+        }
+      });
+      observer.observe(liteYT, { attributes: true, attributeFilter: ['class'] });
+
+      // Fallback: also listen for click directly
+      liteYT.addEventListener('click', () => {
+        setTimeout(() => {
+          if (liteYT.classList.contains('lyt-activated')) {
+            pauseAllOtherVideos(liteYT);
+            carouselTrack.classList.add('video-active');
+            currentCarouselVideo = liteYT;
+          }
+        }, 100);
+      });
+    });
+
+    // Listen for YouTube postMessage to detect video end/pause → resume carousel
+    window.addEventListener('message', (event) => {
+      if (typeof event.data !== 'string') return;
+      try {
+        const data = JSON.parse(event.data);
+        if (data.event === 'infoDelivery' && data.info && data.info.playerState === 0) {
+          // playerState 0 = ended
+          if (currentCarouselVideo) {
+            currentCarouselVideo = null;
+          }
+          carouselTrack.classList.remove('video-active');
+        }
+      } catch (e) {}
+    });
+
+    // Also resume carousel if user clicks outside the video (on the card text area etc)
+    carouselTrack.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // If click is NOT on a lite-youtube, resume carousel
+        if (!e.target.closest('lite-youtube')) {
+          carouselTrack.classList.remove('video-active');
+          currentCarouselVideo = null;
+        }
+      });
+    });
+  }
+
   // ==========================================
   // CAROUSEL DRAG TO SCROLL
   // ==========================================
   const carouselContainer = document.querySelector('.projects-carousel');
-  const carouselTrack = document.querySelector('.carousel-track');
   if (carouselContainer && carouselTrack) {
     let isDragging = false;
     let startX;
