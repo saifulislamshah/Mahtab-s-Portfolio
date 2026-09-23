@@ -215,24 +215,44 @@ ul {
    HERO
    ============================================ */
 .hero {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--bg-dark);
   overflow: hidden;
-  background: var(--bg-primary);
 }
 
-.hero-grid {
-  max-width: var(--container-max);
-  margin: 0 auto;
-  padding: 0 var(--container-pad);
-  padding-top: 50px;
+/* Hero banner: always shown whole — never cropped, never dimmed, never taller
+   than the viewport — so the artwork stays the visual lead of the section */
+.hero-bg {
   width: 100%;
-  display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
-  gap: 30px;
-  align-items: center;
+  z-index: 0;
+  animation: heroBgIn 1.2s var(--ease-out) both;
+}
+
+.hero-bg-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 100vh;
+  object-fit: contain;
+}
+
+@keyframes heroBgIn {
+  from { opacity: 0; transform: scale(1.04); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Copy sits over the artwork, inside its clear lower-left lane */
+.hero-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 var(--container-pad) min(12%, 110px);
 }
 
 .hero-content {
@@ -336,53 +356,47 @@ ul {
   flex-wrap: wrap;
 }
 
-.hero-scroll-line {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 1px;
-  height: 60px;
-  background: linear-gradient(to bottom, var(--accent), transparent);
-  animation: scrollLine 2s var(--ease-in-out) infinite;
-}
+/* Desktop: compact copy, sized to stay inside the banner's clear left lane */
+@media (min-width: 1025px) {
+  .hero-content {
+    max-width: min(400px, 22vw);
+  }
 
-.hero-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+  .hero-title {
+    font-size: clamp(26px, 2.4vw, 36px);
+    margin-bottom: 20px;
+  }
 
-.hero-image-frame {
-  width: 100%;
-  max-width: 320px;
-  aspect-ratio: 3/4;
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.06);
-}
+  .hero-roles {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    margin-bottom: 16px;
+  }
 
-.hero-profile-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  transition: transform 0.6s var(--ease-out);
-}
+  .hero-role {
+    font-size: 13px;
+    letter-spacing: 0.03em;
+  }
 
-.hero-image-frame:hover .hero-profile-img {
-  transform: scale(1.04);
-}
+  .hero-role-dot {
+    display: none;
+  }
 
-@keyframes scrollLine {
-  0% { opacity: 0; transform: translateX(-50%) translateY(-20px); }
-  50% { opacity: 1; }
-  100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  .hero-desc {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 22px;
+  }
+
+  .hero-ctas {
+    gap: 10px;
+  }
+
+  .hero-ctas .btn {
+    padding: 13px 20px;
+    font-size: 11px;
+  }
 }
 
 /* Buttons */
@@ -2202,17 +2216,23 @@ lite-youtube[ready] .lty-playbtn {
     gap: 24px;
   }
 
+  /* Hero: banner flows under the copy as a full-width poster */
+  .hero {
+    justify-content: flex-start;
+    padding: 120px 0 90px;
+  }
+
   .hero-grid {
-    grid-template-columns: 1fr;
-    gap: 36px;
+    position: static;
+    padding: 0 var(--container-pad);
   }
 
-  .hero-image {
-    order: -1;
+  .hero-content {
+    max-width: 640px;
   }
 
-  .hero-image-frame {
-    max-width: 260px;
+  .hero-bg {
+    margin-top: 44px;
   }
 
   .about-grid {
@@ -2246,6 +2266,10 @@ lite-youtube[ready] .lty-playbtn {
 
   .hero-role-dot {
     display: none;
+  }
+
+  .hero {
+    padding: 100px 0 110px;
   }
 
   .project-card {

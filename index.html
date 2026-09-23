@@ -10,6 +10,7 @@
   <meta name="description" content="Mahtab Islam — Creative Designer, Video Editor & Motion Designer portfolio.">
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lite-youtube-embed/0.3.3/lite-yt-embed.css">
+  <link rel="preload" as="image" href="Image/Mahtab Hero Image.webp" fetchpriority="high">
   <script defer>
     document.querySelectorAll('lite-youtube').forEach(function(el) {
       el.setAttribute('params', 'controls=0&modestbranding=1&rel=0');
@@ -76,13 +77,12 @@
           </div>
         </div>
       </div>
-      <div class="hero-image" data-reveal>
-        <div class="hero-image-frame">
-          <img src="Image/Mahtab 2.webp" alt="Mahtab Islam" class="hero-profile-img">
-        </div>
-      </div>
     </div>
-    <div class="hero-scroll-line"></div>
+
+    <!-- Hero banner: shown whole, never cropped or dimmed -->
+    <div class="hero-bg">
+      <img src="Image/Mahtab Hero Image.webp" alt="Mahtab Islam — video editor with 3+ years of experience, standing in a spotlight in front of an oversized MAHTAB ISLAM backdrop" class="hero-bg-img" width="3360" height="1890" fetchpriority="high" decoding="async">
+    </div>
   </section>
 
   <!-- 04 — SELECTED WORK HEADER -->
