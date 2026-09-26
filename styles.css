@@ -305,56 +305,64 @@ ul {
   transition: width 1.2s var(--ease-out) 0.4s;
 }
 
-.hero-sub {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.hero-sub.revealed {
-  opacity: 1;
-  transform: translateY(0);
-  transition: all 0.8s var(--ease-out) 0.6s;
-}
-
-.hero-roles {
+/* Hero bottom roles — inside the banner image */
+.hero-bottom-roles {
+  position: absolute;
+  bottom: 5%;
+  left: 0;
+  right: 0;
   display: flex;
-  align-items: center;
-  gap: 12px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 5%;
+  z-index: 3;
 }
 
-.hero-role {
+.hero-bottom-role {
   font-family: var(--font-heading);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
   color: var(--text-secondary);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+  cursor: pointer;
+  position: relative;
+  padding: 8px 0;
 }
 
-.hero-role.revealed {
+.hero-bottom-role::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.4s var(--ease-out), background 0.4s var(--ease-out);
+}
+
+.hero-bottom-role.revealed {
   opacity: 1;
   transform: translateY(0);
+  transition: color 0.3s, transform 0.3s var(--ease-out);
 }
 
-.hero-role-dot {
+.hero-bottom-role.revealed:hover,
+.hero-bottom-role.revealed:active {
   color: var(--accent);
-  font-size: 20px;
+  transform: translateY(-4px) scale(1.05);
 }
 
-.hero-desc {
-  font-size: 16px;
-  line-height: 1.7;
-  color: var(--text-secondary);
-  max-width: 520px;
-  margin-bottom: 32px;
+.hero-bottom-role.revealed:hover::after,
+.hero-bottom-role.revealed:active::after {
+  width: 100%;
 }
 
-.hero-ctas {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-}
+.hero-bottom-role:nth-child(1) { transition-delay: 0.8s; }
+.hero-bottom-role:nth-child(2) { transition-delay: 1.0s; }
+.hero-bottom-role:nth-child(3) { transition-delay: 1.2s; }
 
 /* Desktop: compact copy, sized to stay inside the banner's clear left lane */
 @media (min-width: 1025px) {
@@ -367,35 +375,8 @@ ul {
     margin-bottom: 20px;
   }
 
-  .hero-roles {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 2px;
-    margin-bottom: 16px;
-  }
-
-  .hero-role {
-    font-size: 13px;
-    letter-spacing: 0.03em;
-  }
-
-  .hero-role-dot {
-    display: none;
-  }
-
-  .hero-desc {
-    font-size: 13px;
-    line-height: 1.6;
-    margin-bottom: 22px;
-  }
-
-  .hero-ctas {
-    gap: 10px;
-  }
-
-  .hero-ctas .btn {
-    padding: 13px 20px;
-    font-size: 11px;
+  .hero-bottom-role {
+    font-size: 12px;
   }
 }
 
@@ -2258,14 +2239,13 @@ lite-youtube[ready] .lty-playbtn {
     font-size: clamp(28px, 8vw, 48px);
   }
 
-  .hero-roles {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
+  .hero-bottom-roles {
+    padding: 0 20px 24px;
   }
 
-  .hero-role-dot {
-    display: none;
+  .hero-bottom-role {
+    font-size: 10px;
+    letter-spacing: 0.04em;
   }
 
   .hero {
@@ -2330,11 +2310,6 @@ lite-youtube[ready] .lty-playbtn {
 }
 
 @media (max-width: 480px) {
-  .hero-ctas {
-    flex-direction: column;
-    width: 100%;
-  }
-
   .btn {
     width: 100%;
     justify-content: center;

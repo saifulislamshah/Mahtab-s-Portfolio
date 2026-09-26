@@ -66,8 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   function animateHero() {
     const heroLines = document.querySelectorAll('.hero-line');
-    const heroSub = document.querySelector('.hero-sub');
-    const heroRoles = document.querySelectorAll('.hero-role');
+    const heroBottomRoles = document.querySelectorAll('.hero-bottom-role');
 
     // Reveal lines one by one
     heroLines.forEach((line, i) => {
@@ -76,16 +75,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }, 200 + i * 200);
     });
 
-    // Reveal subtitle block
-    setTimeout(() => {
-      if (heroSub) heroSub.classList.add('revealed');
-    }, 800);
-
-    // Reveal roles one by one
-    heroRoles.forEach((role, i) => {
+    // Reveal bottom roles one by one
+    heroBottomRoles.forEach((role, i) => {
       setTimeout(() => {
         role.classList.add('revealed');
-      }, 1000 + i * 150);
+      }, 800 + i * 200);
     });
   }
 
